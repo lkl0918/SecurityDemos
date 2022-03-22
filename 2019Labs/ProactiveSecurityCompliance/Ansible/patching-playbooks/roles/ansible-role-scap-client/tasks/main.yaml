@@ -39,29 +39,29 @@
   register: scapcontents
   loop: "{{ policy }}"
 
-- name: Get tailoring content information
-  uri:
-    url: https://{{sat_server}}/api/v2/compliance/tailoring_files/{{item.tailoring_file_id}}
-    method: GET
-    user: "{{sat_user}}"
-    password: "{{sat_pass}}"
-    force_basic_auth: yes
-    body_format: json
-    validate_certs: False
-  register: tailoringfiles
-  when: item.tailoring_file_id is defined and item.tailoring_file_id > 0
-  loop: "{{ policy }}"
+#- name: Get tailoring content information
+#  uri:
+#    url: https://{{sat_server}}/api/v2/compliance/tailoring_files/{{item.tailoring_file_id}}
+#    method: GET
+#    user: "{{sat_user}}"
+#    password: "{{sat_pass}}"
+#    force_basic_auth: yes
+#    body_format: json
+#    validate_certs: False
+#  register: tailoringfiles
+#  when: item.tailoring_file_id > 0
+#  loop: "{{ policy }}"
 
 - name: Build scap content parameters
   set_fact:
     scap_content: "{{ scap_content | default({}) | combine({item.json.id: item.json }) }}"
   loop: "{{ scapcontents.results }}"
 
-- name: Build tailoring content parameters
-  set_fact:
-    tailoring_files: "{{ tailoring_files | default({}) | combine({item.json.id: item.json }) }}"
-  when: item.json is defined
-  loop: "{{ tailoringfiles.results }}"
+#- name: Build tailoring content parameters
+#  set_fact:
+#    tailoring_files: "{{ tailoring_files | default({}) | combine({item.json.id: item.json }) }}"
+#  when: item.json is defined
+#  loop: "{{ tailoringfiles.results }}"
 
 - name: Apply openscap client configuration template
   template:
