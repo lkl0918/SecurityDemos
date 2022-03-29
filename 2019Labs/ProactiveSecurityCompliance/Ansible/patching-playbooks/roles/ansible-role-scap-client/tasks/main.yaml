@@ -75,7 +75,7 @@
   cron:
     name: "Openscap Execution"
     cron_file: 'foreman_openscap_client'
-    job: '/usr/bin/foreman_scap_client {{policy.id}} > /dev/null'
+    job: '/usr/bin/foreman_scap_client {{ policy[0].id }} > /dev/null'
     weekday: "0"
     hour: "1"
     minute: "0"
