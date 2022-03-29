@@ -71,12 +71,12 @@
     owner: root
     group: root
 
-#- name: Configure execution crontab
-#  cron:
-#    name: "Openscap Execution"
-#    cron_file: 'foreman_openscap_client'
-#    job: '/usr/bin/foreman_scap_client {{policy.id}} > /dev/null'
-#    weekday: "{{crontab_weekdays}}"
-#    hour: "{{crontab_hour}}"
-#    minute: "{{crontab_minute}}"
-#    user: root
+- name: Configure execution crontab
+  cron:
+    name: "Openscap Execution"
+    cron_file: 'foreman_openscap_client'
+    job: '/usr/bin/foreman_scap_client {{policy.id}} > /dev/null'
+    weekday: "{{crontab_weekdays}}"
+    hour: "{{crontab_hour}}"
+    minute: "{{crontab_minute}}"
+    user: root
